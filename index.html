@@ -12,7 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 </head>
 <body class="bg-gray-50 font-sans">
-  <div id="root"></div>
+  <div id="root">Cargando aplicación... Si ves esto, revisa la consola del navegador para errores.</div>
 
   <script type="text/babel">
     const { useState, useEffect, useRef } = React;
@@ -449,7 +449,8 @@
             </div>
           )}
           <textarea
-            placeholder="Escribe una descripción..."
+ AMERICANENGLISH
+            placeholder="Write a caption..."
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
             className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -459,7 +460,7 @@
             onClick={handleSubmit}
             className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full"
           >
-            Publicar
+            Post
           </button>
         </div>
       );
@@ -481,7 +482,7 @@
         const selectedFile = e.target.files[0];
         if (selectedFile) {
           if (selectedFile.size > 50 * 1024 * 1024) {
-            setError('El archivo excede el límite de 50MB');
+            setError('The file exceeds the 50MB limit');
             return;
           }
           setFile(selectedFile);
@@ -514,7 +515,7 @@
       const handleSubmit = async (e) => {
         e.preventDefault();
         if (!file) {
-          setError('Por favor selecciona un video');
+          setError('Please select a video');
           return;
         }
         const formData = new FormData();
@@ -538,15 +539,15 @@
           onReel();
           onClose();
         } catch (error) {
-          console.error('Error al crear reel:', error);
-          setError(error.response?.data?.message || 'Error al crear reel');
+          console.error('Error creating reel:', error);
+          setError(error.response?.data?.message || 'Error creating reel');
         }
       };
 
       return (
         <div className="bg-white border rounded-lg p-4 max-w-lg mx-auto">
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-lg font-semibold">Nuevo Reel</h2>
+            <h2 className="text-lg font-semibold">New Reel</h2>
             <button onClick={onClose} className="text-gray-600 hover:text-gray-800">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -564,7 +565,7 @@
             <div className="mb-2 relative" onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
               <video ref={videoRef} controls className="w-full h-auto">
                 <source src={preview} type="video/mp4" />
-                Tu navegador no soporta videos.
+                Your browser does not support videos.
               </video>
               {textOverlay.text && (
                 <div
@@ -584,7 +585,7 @@
             </div>
           )}
           <textarea
-            placeholder="Escribe una descripción..."
+            placeholder="Write a caption..."
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
             className="w-full p-2 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -592,7 +593,7 @@
           ></textarea>
           <input
             type="text"
-            placeholder="Texto para superponer (puedes usar emojis 😊)"
+            placeholder="Text to overlay (you can use emojis 😊)"
             value={textOverlay.text}
             onChange={(e) => setTextOverlay(prev => ({ ...prev, text: e.target.value }))}
             className="w-full p-2 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -623,7 +624,7 @@
             onClick={handleSubmit}
             className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full"
           >
-            Publicar Reel
+            Post Reel
           </button>
         </div>
       );
@@ -639,7 +640,7 @@
         const selectedFile = e.target.files[0];
         if (selectedFile) {
           if (selectedFile.size > 5 * 1024 * 1024) {
-            setError('La imagen excede el límite de 5MB');
+            setError('The image exceeds the 5MB limit');
             return;
           }
           setFile(selectedFile);
@@ -650,28 +651,28 @@
 
       const handleUpload = async () => {
         if (!file) {
-          setError('Por favor selecciona una imagen');
+          setError('Please select an image');
           return;
         }
         setLoading(true);
         const formData = new FormData();
         formData.append('image', file);
         try {
-          console.log('Subiendo foto de perfil...');
+          console.log('Uploading profile picture...');
           const response = await axios.post(`${API_URL}/users/profile-picture`, formData, {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'multipart/form-data'
             }
           });
-          console.log('Respuesta del servidor:', response.data);
+          console.log('Server response:', response.data);
           setFile(null);
           setPreview(null);
           setError('');
           onProfileUpdate(response.data.imageUrl);
         } catch (error) {
-          console.error('Error al subir foto de perfil:', error);
-          setError(error.response?.data?.message || 'Error al subir foto de perfil');
+          console.error('Error uploading profile picture:', error);
+          setError(error.response?.data?.message || 'Error uploading profile picture');
         } finally {
           setLoading(false);
         }
@@ -683,13 +684,13 @@
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg>
-            Volver
+            Back
           </button>
           <div className="bg-white border rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-4">Ajustes</h2>
-            <h3 className="text-md font-semibold mb-2">Actualizar Foto de Perfil</h3>
+            <h2 className="text-lg font-semibold mb-4">Settings</h2>
+            <h3 className="text-md font-semibold mb-2">Update Profile Picture</h3>
             {error && <p className="text-red-500 mb-2">{error}</p>}
-            {loading && <p className="text-gray-500 mb-2">Subiendo...</p>}
+            {loading && <p className="text-gray-500 mb-2">Uploading...</p>}
             <input
               type="file"
               accept="image/jpeg,image/png"
@@ -706,7 +707,7 @@
               disabled={!file || loading}
               className={`w-full py-2 rounded-lg ${file && !loading ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-300 text-gray-600 cursor-not-allowed'}`}
             >
-              Subir Foto
+              Upload Photo
             </button>
           </div>
         </div>
@@ -727,7 +728,7 @@
         const fetchProfileData = async () => {
           try {
             setLoading(true);
-            console.log(`Cargando datos del perfil para: ${username}`);
+            console.log(`Loading profile data for: ${username}`);
             const [picResponse, followResponse] = await Promise.all([
               axios.get(`${API_URL}/users/${username}/profile-picture`, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -741,8 +742,8 @@
             setFollowing(followResponse.data.following);
             setError('');
           } catch (error) {
-            console.error('Error al obtener datos del perfil:', error);
-            setError(error.response?.data?.message || 'Error al cargar el perfil');
+            console.error('Error fetching profile data:', error);
+            setError(error.response?.data?.message || 'Error loading profile');
           } finally {
             setLoading(false);
           }
@@ -750,7 +751,7 @@
         if (username) {
           fetchProfileData();
         } else {
-          setError('No se proporcionó un nombre de usuario');
+          setError('No username provided');
           setLoading(false);
         }
       }, [username, token]);
@@ -763,8 +764,8 @@
           setIsFollowing(!isFollowing);
           setFollowers(prev => isFollowing ? prev - 1 : prev + 1);
         } catch (error) {
-          console.error('Error al seguir/deseguir:', error);
-          setError(error.response?.data?.message || 'Error al seguir/deseguir');
+          console.error('Error following/unfollowing:', error);
+          setError(error.response?.data?.message || 'Error following/unfollowing');
         }
       };
 
@@ -775,7 +776,7 @@
       if (loading) {
         return (
           <div className="pt-16 pb-16 max-w-lg mx-auto text-center">
-            <p className="text-gray-500">Cargando perfil...</p>
+            <p className="text-gray-500">Loading profile...</p>
           </div>
         );
       }
@@ -787,7 +788,7 @@
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
               </svg>
-              Volver
+              Back
             </button>
             <p className="text-red-500 text-center">{error}</p>
           </div>
@@ -801,7 +802,7 @@
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
               </svg>
-              Volver
+              Back
             </button>
             {isOwnProfile && (
               <button onClick={onSettingsClick} className="text-gray-600 hover:text-gray-800">
@@ -828,9 +829,9 @@
               <div className="ml-4 flex-1">
                 <p className="font-semibold text-lg">{username}</p>
                 <div className="flex space-x-4 mt-2">
-                  <p className="text-sm"><span className="font-semibold">{userPosts.length + userReels.length}</span> Publicaciones</p>
-                  <p className="text-sm"><span className="font-semibold">{followers}</span> Seguidores</p>
-                  <p className="text-sm"><span className="font-semibold">{following}</span> Seguidos</p>
+                  <p className="text-sm"><span className="font-semibold">{userPosts.length + userReels.length}</span> Posts</p>
+                  <p className="text-sm"><span className="font-semibold">{followers}</span> Followers</p>
+                  <p className="text-sm"><span className="font-semibold">{following}</span> Following</p>
                 </div>
               </div>
             </div>
@@ -839,7 +840,7 @@
                 onClick={handleFollow}
                 className={`w-full py-2 rounded-lg ${isFollowing ? 'bg-gray-200 text-gray-800' : 'bg-blue-500 text-white'} hover:opacity-90`}
               >
-                {isFollowing ? 'Dejar de seguir' : 'Seguir'}
+                {isFollowing ? 'Unfollow' : 'Follow'}
               </button>
             )}
           </div>
@@ -858,7 +859,7 @@
               </button>
             ))}
             {userPosts.length === 0 && userReels.length === 0 && (
-              <p className="text-gray-600 text-center col-span-3">No hay publicaciones ni reels</p>
+              <p className="text-gray-600 text-center col-span-3">No posts or reels</p>
             )}
           </div>
         </div>
@@ -882,8 +883,8 @@
               setResults(response.data);
               setError('');
             } catch (error) {
-              console.error('Error al buscar usuarios:', error);
-              setError(error.response?.data?.message || 'Error al buscar usuarios');
+              console.error('Error searching users:', error);
+              setError(error.response?.data?.message || 'Error searching users');
             } finally {
               setLoading(false);
             }
@@ -901,17 +902,17 @@
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg>
-            Volver
+            Back
           </button>
           <div className="bg-white border rounded-lg p-4">
             <input
               type="text"
-              placeholder="Buscar usuarios..."
+              placeholder="Search users..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            {loading && <p className="text-gray-500 mt-2">Buscando...</p>}
+            {loading && <p className="text-gray-500 mt-2">Searching...</p>}
             {error && <p className="text-red-500 mt-2">{error}</p>}
             <div className="mt-4">
               {results.map((user, index) => (
@@ -924,7 +925,7 @@
                 </button>
               ))}
               {results.length === 0 && query && !loading && (
-                <p className="text-gray-600">No se encontraron usuarios</p>
+                <p className="text-gray-600">No users found</p>
               )}
             </div>
           </div>
@@ -943,15 +944,15 @@
         const fetchMessages = async () => {
           try {
             setLoading(true);
-            console.log('Obteniendo mensajes...');
+            console.log('Fetching messages...');
             const response = await axios.get(`${API_URL}/messages`, {
               headers: { Authorization: `Bearer ${token}` }
             });
             setMessages(response.data);
             setError('');
           } catch (error) {
-            console.error('Error al obtener mensajes:', error);
-            setError(error.response?.data?.message || 'Error al cargar mensajes');
+            console.error('Error fetching messages:', error);
+            setError(error.response?.data?.message || 'Error loading messages');
           } finally {
             setLoading(false);
           }
@@ -962,7 +963,7 @@
       const handleSend = async (e) => {
         e.preventDefault();
         if (!receiver.trim() || !content.trim()) {
-          setError('Por favor completa todos los campos');
+          setError('Please complete all fields');
           return;
         }
         try {
@@ -975,8 +976,8 @@
           setContent('');
           setError('');
         } catch (error) {
-          console.error('Error al enviar mensaje:', error);
-          setError(error.response?.data?.message || 'Error al enviar mensaje');
+          console.error('Error sending message:', error);
+          setError(error.response?.data?.message || 'Error sending message');
         }
       };
 
@@ -986,37 +987,22 @@
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg>
-            Volver
+            Back
           </button>
           <div className="bg-white border rounded-lg p-4">
-            <h2 className="font-semibold mb-4">Mensajes</h2>
-            {loading && <p className="text-gray-500 mb enviar mensaje:', error);
-          setError(error.response?.data?.message || 'Error al enviar mensaje');
-        }
-      };
-
-      return (
-        <div className="pt-16 pb-16 max-w-lg mx-auto">
-          <button onClick={onBack} className="mb-4 text-blue-500 flex items-center">
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-            </svg>
-            Volver
-          </button>
-          <div className="bg-white border rounded-lg p-4">
-            <h2 className="font-semibold mb-4">Mensajes</h2>
-            {loading && <p className="text-gray-500 mb-2">Cargando mensajes...</p>}
+            <h2 className="font-semibold mb-4">Messages</h2>
+            {loading && <p className="text-gray-500 mb-2">Loading messages...</p>}
             {error && <p className="text-red-500 mb-2">{error}</p>}
             <div className="mb-4">
               <input
                 type="text"
-                placeholder="Nombre de usuario del destinatario"
+                placeholder="Recipient username"
                 value={receiver}
                 onChange={(e) => setReceiver(e.target.value)}
                 className="w-full p-2 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <textarea
-                placeholder="Escribe tu mensaje..."
+                placeholder="Write your message..."
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 className="w-full p-2 border rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -1026,10 +1012,10 @@
                 onClick={handleSend}
                 className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
               >
-                Enviar
+                Send
               </button>
             </div>
-            {messages.length === 0 && !loading && <p className="text-gray-600">No hay mensajes</p>}
+            {messages.length === 0 && !loading && <p className="text-gray-600">No messages</p>}
             <div className="space-y-2">
               {messages.map((msg, index) => (
                 <div key={index} className="p-2 bg-gray-100 rounded-lg">
@@ -1054,7 +1040,7 @@
         const fetchReels = async () => {
           try {
             setLoading(true);
-            console.log('Obteniendo reels...');
+            console.log('Fetching reels...');
             const response = await axios.get(`${API_URL}/reels`, {
               headers: { Authorization: `Bearer ${token}` }
             });
@@ -1066,7 +1052,7 @@
                   });
                   return { ...reel, profilePic: picResponse.data.imageUrl };
                 } catch (error) {
-                  console.error(`Error al obtener foto de perfil para ${reel.username}:`, error);
+                  console.error(`Error fetching profile picture for ${reel.username}:`, error);
                   return { ...reel, profilePic: null };
                 }
               })
@@ -1074,8 +1060,8 @@
             setReels(reelsWithProfilePics);
             setError('');
           } catch (error) {
-            console.error('Error al obtener reels:', error);
-            setError(error.response?.data?.message || 'Error al cargar reels');
+            console.error('Error fetching reels:', error);
+            setError(error.response?.data?.message || 'Error loading reels');
           } finally {
             setLoading(false);
           }
@@ -1089,11 +1075,11 @@
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg>
-            Volver
+            Back
           </button>
-          {loading && <p className="text-gray-500 mb-2">Cargando reels...</p>}
+          {loading && <p className="text-gray-500 mb-2">Loading reels...</p>}
           {error && <p className="text-red-500 mb-2">{error}</p>}
-          {reels.length === 0 && !loading && <p className="text-gray-600 text-center">No hay reels disponibles</p>}
+          {reels.length === 0 && !loading && <p className="text-gray-600 text-center">No reels available</p>}
           <div className="space-y-4">
             {reels.map((reel, index) => (
               <Reel
@@ -1123,22 +1109,29 @@
       const [selectedProfile, setSelectedProfile] = useState(null);
       const [currentUser, setCurrentUser] = useState(null);
       const [error, setError] = useState('');
+      const [appError, setAppError] = useState('');
       const [loading, setLoading] = useState(false);
       const [selectedPost, setSelectedPost] = useState(null);
       const [selectedReel, setSelectedReel] = useState(null);
 
       useEffect(() => {
+        console.log('App useEffect triggered with token:', token);
         if (token) {
           localStorage.setItem('token', token);
           try {
             const decoded = jwt_decode(token);
-            console.log('Usuario decodificado:', decoded);
-            setCurrentUser(decoded.username);
-            fetchPosts();
-            fetchReels();
+            console.log('Decoded user:', decoded);
+            if (decoded.username) {
+              setCurrentUser(decoded.username);
+              fetchPosts();
+              fetchReels();
+            } else {
+              throw new Error('Invalid token: no username found');
+            }
           } catch (error) {
-            console.error('Error al decodificar token:', error);
-            setError('Sesión inválida, por favor inicia sesión nuevamente');
+            console.error('Error decoding token:', error);
+            setError('Invalid session, please log in again');
+            setAppError('Failed to initialize user session');
             setToken(null);
             setView('login');
           }
@@ -1152,15 +1145,15 @@
       const fetchPosts = async () => {
         try {
           setLoading(true);
-          console.log('Obteniendo publicaciones...');
+          console.log('Fetching posts...');
           const response = await axios.get(`${API_URL}/posts`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           setPosts(response.data);
           setError('');
         } catch (error) {
-          console.error('Error al obtener publicaciones:', error);
-          setError(error.response?.data?.message || 'Error al cargar publicaciones');
+          console.error('Error fetching posts:', error);
+          setError(error.response?.data?.message || 'Error loading posts');
         } finally {
           setLoading(false);
         }
@@ -1169,7 +1162,7 @@
       const fetchReels = async () => {
         try {
           setLoading(true);
-          console.log('Obteniendo reels...');
+          console.log('Fetching reels...');
           const response = await axios.get(`${API_URL}/reels`, {
             headers: { Authorization: `Bearer ${token}` }
           });
@@ -1181,7 +1174,7 @@
                 });
                 return { ...reel, profilePic: picResponse.data.imageUrl };
               } catch (error) {
-                console.error(`Error al obtener foto de perfil para ${reel.username}:`, error);
+                console.error(`Error fetching profile picture for ${reel.username}:`, error);
                 return { ...reel, profilePic: null };
               }
             })
@@ -1189,15 +1182,15 @@
           setReels(reelsWithProfilePics);
           setError('');
         } catch (error) {
-          console.error('Error al obtener reels:', error);
-          setError(error.response?.data?.message || 'Error al cargar reels');
+          console.error('Error fetching reels:', error);
+          setError(error.response?.data?.message || 'Error loading reels');
         } finally {
           setLoading(false);
         }
       };
 
       const handleProfileClick = (username) => {
-        console.log(`Navegando al perfil de: ${username}`);
+        console.log(`Navigating to profile: ${username}`);
         setSelectedProfile(username);
         setSelectedPost(null);
         setSelectedReel(null);
@@ -1206,23 +1199,23 @@
 
       const handleOwnProfileClick = () => {
         if (currentUser) {
-          console.log(`Navegando al perfil propio: ${currentUser}`);
+          console.log(`Navigating to own profile: ${currentUser}`);
           setSelectedProfile(currentUser);
           setSelectedPost(null);
           setSelectedReel(null);
           setView('profile');
         } else {
-          setError('No estás autenticado');
+          setError('You are not authenticated');
         }
       };
 
       const handleSettingsClick = () => {
-        console.log('Navegando a ajustes');
+        console.log('Navigating to settings');
         setView('settings');
       };
 
       const handleLogout = () => {
-        console.log('Cerrando sesión');
+        console.log('Logging out');
         setToken(null);
         setCurrentUser(null);
         setSelectedProfile(null);
@@ -1232,18 +1225,35 @@
       };
 
       const handleSelectPost = (post) => {
-        console.log('Seleccionando publicación:', post);
+        console.log('Selecting post:', post);
         setSelectedPost(post);
         setView('post');
       };
 
       const handleSelectReel = (reel) => {
-        console.log('Seleccionando reel:', reel);
+        console.log('Selecting reel:', reel);
         setSelectedReel(reel);
         setView('reel');
       };
 
       const renderView = () => {
+        if (appError) {
+          return (
+            <div className="pt-16 pb-16 max-w-lg mx-auto text-center">
+              <p className="text-red-500">{appError}</p>
+              <button
+                onClick={() => {
+                  setAppError('');
+                  setView('login');
+                }}
+                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+              >
+                Try Again
+              </button>
+            </div>
+          );
+        }
+
         switch (view) {
           case 'login':
             return <LoginForm onSwitchToRegister={() => setView('register')} setToken={setToken} />;
@@ -1252,9 +1262,9 @@
           case 'feed':
             return (
               <div className="pt-16 pb-16 max-w-lg mx-auto">
-                {loading && <p className="text-gray-500 text-center">Cargando publicaciones...</p>}
+                {loading && <p className="text-gray-500 text-center">Loading posts...</p>}
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-                {posts.length === 0 && !loading && <p className="text-gray-600 text-center">No hay publicaciones</p>}
+                {posts.length === 0 && !loading && <p className="text-gray-600 text-center">No posts</p>}
                 <div className="space-y-4">
                   {posts.map((post) => (
                     <Post
@@ -1298,7 +1308,7 @@
                 token={token}
                 username={currentUser}
                 onProfileUpdate={(imageUrl) => {
-                  console.log('Foto de perfil actualizada:', imageUrl);
+                  console.log('Profile picture updated:', imageUrl);
                   setView('profile');
                 }}
               />
@@ -1316,7 +1326,7 @@
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                   </svg>
-                  Volver
+                  Back
                 </button>
                 <Post
                   postId={selectedPost.id}
@@ -1337,7 +1347,7 @@
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                   </svg>
-                  Volver
+                  Back
                 </button>
                 <Reel
                   username={selectedReel.username}
@@ -1354,10 +1364,11 @@
               </div>
             ) : null;
           default:
-            return <div className="pt-16 pb-16 max-w-lg mx-auto text-center">Vista no encontrada</div>;
+            return <div className="pt-16 pb-16 max-w-lg mx-auto text-center">View not found</div>;
         }
       };
 
+      console.log('Rendering App with view:', view);
       return (
         <div className="min-h-screen bg-gray-50">
           <header className="bg-white border-b p-3 fixed top-0 w-full z-10">
@@ -1368,24 +1379,24 @@
               <div className="flex space-x-4">
                 {token ? (
                   <>
-                    <button onClick={() => setView('postForm')} title="Nueva publicación">
+                    <button onClick={() => setView('postForm')} title="New post">
                       <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
                       </svg>
                     </button>
-                    <button onClick={() => setView('reelForm')} title="Nuevo reel">
+                    <button onClick={() => setView('reelForm')} title="New reel">
                       <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                       </svg>
                     </button>
-                    <button onClick={handleLogout} title="Cerrar sesión">
+                    <button onClick={handleLogout} title="Log out">
                       <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m5 4v-7" />
                       </svg>
                     </button>
                   </>
                 ) : (
-                  <button onClick={() => setView('login')} title="Iniciar sesión">
+                  <button onClick={() => setView('login')} title="Log in">
                     <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v-7" />
                     </svg>
@@ -1398,17 +1409,17 @@
           {token && (
             <footer className="bg-white border-t p-3 fixed bottom-0 w-full">
               <div className="max-w-lg mx-auto flex justify-between">
-                <button onClick={() => setView('feed')} title="Inicio">
+                <button onClick={() => setView('feed')} title="Home">
                   <svg className={`w-6 h-6 ${view === 'feed' ? 'text-blue-500' : 'text-gray-800'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
                 </button>
-                <button onClick={() => setView('search')} title="Buscar">
+                <button onClick={() => setView('search')} title="Search">
                   <svg className={`w-6 h-6 ${view === 'search' ? 'text-blue-500' : 'text-gray-800'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </button>
-                <button onClick={() => setView('postForm')} title="Nueva publicación">
+                <button onClick={() => setView('postForm')} title="New post">
                   <svg className={`w-6 h-6 ${view === 'postForm' ? 'text-blue-500' : 'text-gray-800'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
                   </svg>
@@ -1418,12 +1429,12 @@
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
                 </button>
-                <button onClick={() => setView('messages')} title="Mensajes">
+                <button onClick={() => setView('messages')} title="Messages">
                   <svg className={`w-6 h-6 ${view === 'messages' ? 'text-blue-500' : 'text-gray-800'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                 </button>
-                <button onClick={handleOwnProfileClick} title="Mi perfil">
+                <button onClick={handleOwnProfileClick} title="My profile">
                   <svg className={`w-6 h-6 ${view === 'profile' && selectedProfile === currentUser ? 'text-blue-500' : 'text-gray-800'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
@@ -1435,7 +1446,19 @@
       );
     };
 
-    ReactDOM.render(<App />, document.getElementById('root'));
+    try {
+      console.log('Attempting to render App');
+      ReactDOM.render(<App />, document.getElementById('root'));
+      console.log('App rendered successfully');
+    } catch (error) {
+      console.error('Error rendering App:', error);
+      document.getElementById('root').innerHTML = `
+        <div class="max-w-lg mx-auto p-4 text-center">
+          <p class="text-red-500">Error loading application: ${error.message}</p>
+          <p class="text-gray-600">Please check the console for more details.</p>
+        </div>
+      `;
+    }
   </script>
 </body>
 </html>
